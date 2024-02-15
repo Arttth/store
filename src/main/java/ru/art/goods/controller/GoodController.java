@@ -1,6 +1,10 @@
 package ru.art.goods.controller;
 
 import org.springframework.web.bind.annotation.*;
+import ru.art.goods.api.request.GoodRequest;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @RestController
 public class GoodController {
@@ -10,17 +14,17 @@ public class GoodController {
     }
 
     @PostMapping("/")
-    String addGood() {
-        return "Good added";
+    String addGood(@RequestBody GoodRequest request) {
+        return request.getName();
     }
 
     @GetMapping("/")
-    String getGoods() {
-        return "Goods";
+    Collection<String> getGoods() {
+        return Collections.emptyList();
     }
 
     @PatchMapping("/{id}")
-    String changeGoodById(@PathVariable int id) {
-        return "Good changes " + id;
+    String changeGoodById(@PathVariable int id, @RequestBody GoodRequest request) {
+        return "Good changes " + request.getName() ;
     }
 }
